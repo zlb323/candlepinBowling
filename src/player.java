@@ -7,7 +7,6 @@ public class player {
     private String name;
     private List<frame> frames;
     private Iterator<frame> currentFrame;
-    private int totalScore;
 
     public player(){
         //generate 10 empty frame objects
@@ -35,7 +34,12 @@ public class player {
 
     public String getScoreString(){
         String str = "";
+        int score = 0;
         str += "| " + name + " | ";
-        for(int i = 0; i < frames.size(); i++)
+        for(int i = 0; i < frames.size(); i++){
+            score += frames.get(i).getScore();
+            str += score + " | ";
+        }
+        return str;
     }
 }

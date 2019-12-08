@@ -18,7 +18,7 @@ public class frame {
     }
 
     public boolean throwResult(int pins){
-        if(totalScore + pins > 10) {
+        if(totalScore + pins > 10 && !isSpare() && !isStrike()) {
             System.out.println("Total Score for a frame cannont exceed 10, Please reenter score:");
             return false;
         }
@@ -27,5 +27,9 @@ public class frame {
         if(currentThrow == 2 || totalScore == 10) return true;
         currentThrow++;
         return false;
+    }
+
+    public int getScore(){
+        return totalScore;
     }
 }
