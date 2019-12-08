@@ -4,8 +4,16 @@ import java.util.Scanner;
 public class game {
     private player[] players;
 
-    public game(int numOfPlayers){
+    public game(){
         Scanner scanner = new Scanner(System.in);
+        int numOfPlayers = 0;
+        System.out.println("Enter the number of players:" );
+        try{
+            numOfPlayers = scanner.nextInt();
+        } catch (InputMismatchException e){
+            System.out.println("Invalid Number: " + e.getMessage());
+            return;
+        }
         players = new player[numOfPlayers];
         setAllPlayerNames(scanner);
         play(scanner);
@@ -13,18 +21,20 @@ public class game {
 
     private void play(Scanner scanner){
         int currentPlayer = 0;
-        frame currentFrame;
+        frame currentFrame = players[0].getNextFrame();
         do{
-            currentFrame = players[currentPlayer].getNextFrame();
             if(currentFrame == null) return;
 
             System.out.println("Enter the next score for player " + players[currentPlayer].getName() + " : ");
             currentFrame.throwResult(inputNextScore(scanner));
-        } while()
+            currentFrame = players[currentPlayer].getNextFrame();
+
+        } while(currentFrame != null);
     }
 
-    public void setAllPlayerNames(Scanner scanner){
+    private void setAllPlayerNames(Scanner scanner){
         for(int i = 0; i < players.length; i++){
+            players[i] = new player();
             setPlayerName(i, scanner);
         }
     }
@@ -47,5 +57,9 @@ public class game {
             }
         } while(input != -1);
         return input;
+    }
+
+    private void printScoreBoard(){
+
     }
 }

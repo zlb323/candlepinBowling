@@ -1,14 +1,19 @@
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class player {
     private String name;
-    private ArrayList<frame> frames;
+    private List<frame> frames;
     private Iterator<frame> currentFrame;
     private int totalScore;
 
     public player(){
-        frames = new ArrayList<>();
+        //generate 10 empty frame objects
+        frames = Stream.generate(frame::new)
+                .limit(10)
+                .collect(Collectors.toList());
         frames.add(new frame());
         currentFrame = frames.iterator();
     }
