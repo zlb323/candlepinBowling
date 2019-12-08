@@ -32,4 +32,10 @@ public class player {
         }
         return null;
     }
+
+    public String getScoreString(){
+        String str = "";
+        str += "| " + name + " | ";
+        for(int i = 0; i < frames.size(); i++)
+    }
 }

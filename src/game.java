@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class game {
     private player[] players;
+    private int numOfPlayers;
 
     public game(){
         Scanner scanner = new Scanner(System.in);
-        int numOfPlayers = 0;
         System.out.println("Enter the number of players:" );
         try{
             numOfPlayers = scanner.nextInt();
@@ -25,8 +25,13 @@ public class game {
         do{
             if(currentFrame == null) return;
 
-            System.out.println("Enter the next score for player " + players[currentPlayer].getName() + " : ");
-            currentFrame.throwResult(inputNextScore(scanner));
+            boolean isFinished = false;
+            while(!isFinished){
+                System.out.println("Enter the next score for player " + players[currentPlayer].getName() + " : ");
+                isFinished = currentFrame.throwResult(inputNextScore(scanner));
+            }
+            currentPlayer++;
+            if(currentPlayer >= numOfPlayers) currentPlayer = 0;
             currentFrame = players[currentPlayer].getNextFrame();
 
         } while(currentFrame != null);
@@ -55,11 +60,13 @@ public class game {
             } catch (InputMismatchException e){
                 System.out.println("Please enter a valid number between 0 and 10");
             }
-        } while(input != -1);
+        } while(input == -1);
         return input;
     }
 
     private void printScoreBoard(){
-
+        for(int i = 0; i < players.length; i++){
+            System.out.print(players[i].getName())
+        }
     }
 }
