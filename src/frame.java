@@ -32,4 +32,8 @@ public class frame {
     public int getScore(){
         return totalScore;
     }
+
+    public int getThrow(int i){
+        return throwresults[i];
+    }
 }

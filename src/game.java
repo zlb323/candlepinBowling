@@ -33,7 +33,7 @@ public class game {
             currentPlayer++;
             if(currentPlayer >= numOfPlayers) currentPlayer = 0;
             currentFrame = players[currentPlayer].getNextFrame();
-
+            printScoreBoard();
         } while(currentFrame != null);
     }
 
@@ -66,7 +66,7 @@ public class game {
 
     private void printScoreBoard(){
         for(int i = 0; i < players.length; i++){
-            System.out.print(players[i].getName())
+            System.out.println(players[i].getScoreString());
         }
     }
 }

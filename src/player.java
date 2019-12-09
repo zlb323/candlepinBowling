@@ -33,6 +33,7 @@ public class player {
     }
 
     public String getScoreString(){
+        calculateScores();
         String str = "";
         int score = 0;
         str += "| " + name + " | ";
@@ -41,5 +42,19 @@ public class player {
             str += score + " | ";
         }
         return str;
+    }
+
+    //this function goes through and add scores for finished frames for successive throws.
+    private void calculateScores(){
+        for(int i = 0; i < frames.size() -1; i++){
+            if(frames.get(i).isStrike()){
+                int frameForThrowResult = i+1;
+                int throwNumber = 0;
+                frames.get(i).throwResult(frames.get(frameForThrowResult).getThrow(throwNumber));
+                if(frames.get(frameForThrowResult).isStrike() && frameForThrowResult != frames.size() -1) frameForThrowResult++;
+                else throwNumber++;
+                frames.get(i).throwResult(frames.get(frameForThrowResult).getThrow(throwNumber));
+            }
+        }
     }
 }
